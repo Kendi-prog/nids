@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIDS Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="NIDS Logo" />
+            <h1>NIDS Dashboard</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#alerts">Alerts</a></li>
+                <li><a href="#logs">Logs</a></li>
+                <li><a href="#users">User  Management</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="dashboard">
+            <h2>Dashboard Overview</h2>
+            <p>Welcome to the NIDS Dashboard. Here you can monitor network activity and manage alerts.</p>
+            <div class="dashboard-cards">
+                <div class="card">
+                    <h3>Total Alerts</h3>
+                    <p id="total-alerts">0</p>
+                </div>
+                <div class="card">
+                    <h3>Total Logs</h3>
+                    <p id="total-logs">0</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="alerts">
+            <h2>Alerts</h2>
+            <button id="fetch-alerts">Fetch Alerts</button>
+            <div id="alert-list"></div>
+        </section>
+
+        <section id="logs">
+            <h2>Logs</h2>
+            <button id="fetch-logs">Fetch Logs</button>
+            <div id="log-list"></div>
+        </section>
+
+        <section id="users">
+            <h2>User Management</h2>
+            <button id="fetch-users">Fetch Users</button>
+            <div id="user-list"></div>
+        </section>
+
+        <section id="about">
+            <h2>About NIDS</h2>
+            <p>This is a Network Intrusion Detection System (NIDS) project that monitors network traffic for suspicious activity.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 NIDS Project. All rights reserved.</p>
+    </footer>
+</body>
+</html>
