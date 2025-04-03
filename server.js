@@ -1,24 +1,27 @@
-// Import required modules
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const connectDB = require('./config/db'); // Import the database connection function
-const userRoutes = require('./routes/userRoutes'); // Import user routes
-require('dotenv').config(); // Load environment variables from .env file
+const connectDB = require('./config/db'); 
+const userRoutes = require('./routes/userRoutes'); 
+const alertRoutes = require('./routes/alertRoutes');
+const logRoutes = require('./routes/logRoutes');
+require('dotenv').config();
 
-// Create an instance of the Express application
+// Create an Express app
 const app = express();
-const PORT = process.env.PORT || 5000; // Set the port to listen on
+const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB
 connectDB();
 
 // Middleware
-app.use(cors()); // Enable CORS for all routes
-app.use(bodyParser.json()); // Parse JSON request bodies
+app.use(cors()); 
+app.use(bodyParser.json()); 
 
-// Define routes
-app.use('/api/users', userRoutes); // Use user routes for /api/users endpoint
+// Use the routes
+app.use('/api/users', userRoutes); 
+app.use('/api/alerts', alertRoutes); 
+app.use('/api/logs', logRoutes); 
 
 // Start the server
 app.listen(PORT, () => {
