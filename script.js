@@ -69,6 +69,32 @@ async function fetchUsers() {
     }
 }
 
+document.getElementById('register-form').addEventListener('submit', async function(e) {
+    e.preventDefault(); // Prevent the form from reloading the page
+    
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch('http://localhost:5000/api/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, email, password })
+        });
+
+        if (!response.ok) throw new Error('User creation failed');
+        const data = await response.json();
+        document.getElementById('message').innerText = 'User created successfully!';
+        console.log(data); // Optionally log the response data
+    } catch (error) {
+        document.getElementById('message').innerText = error.message;
+        console.error(error);
+    }
+});
+
 // Function to display users in the UI
 function displayUsers(users) {
     const userList = document.getElementById('user-list');
