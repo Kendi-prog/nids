@@ -1,11 +1,10 @@
-// Function to fetch alerts from the backend
 async function fetchAlerts() {
     try {
-        const response = await fetch('http://localhost:3000/alerts'); // Adjust the endpoint as necessary
+        const response = await fetch('http://localhost:5000/api/alerts'); 
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         displayAlerts(data.alerts);
-        document.getElementById('total-alerts').innerText = data.alerts.length; // Update total alerts
+        document.getElementById('total-alerts').innerText = data.alerts.length;
     } catch (error) {
         console.error('Error fetching alerts:', error);
         alert('Failed to fetch alerts. Please try again later.');
@@ -15,7 +14,7 @@ async function fetchAlerts() {
 // Function to display alerts in the UI
 function displayAlerts(alerts) {
     const alertList = document.getElementById('alert-list');
-    alertList.innerHTML = ''; // Clear previous alerts
+    alertList.innerHTML = ''; 
     alerts.forEach(alert => {
         const alertItem = document.createElement('div');
         alertItem.className = 'alert-item';
@@ -28,14 +27,14 @@ function displayAlerts(alerts) {
     });
 }
 
-// Function to fetch logs from the backend
+// Fetch logs from the backend
 async function fetchLogs() {
     try {
-        const response = await fetch('http://localhost:3000/logs'); // Adjust the endpoint as necessary
+        const response = await fetch('http://localhost:5000/api/logs'); 
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         displayLogs(data.logs);
-        document.getElementById('total-logs').innerText = data.logs.length; // Update total logs
+        document.getElementById('total-logs').innerText = data.logs.length;
     } catch (error) {
         console.error('Error fetching logs:', error);
         alert('Failed to fetch logs. Please try again later.');
@@ -45,7 +44,7 @@ async function fetchLogs() {
 // Function to display logs in the UI
 function displayLogs(logs) {
     const logList = document.getElementById('log-list');
-    logList.innerHTML = ''; // Clear previous logs
+    logList.innerHTML = ''; 
     logs.forEach(log => {
         const logItem = document.createElement('div');
         logItem.className = 'log-item';
@@ -57,10 +56,10 @@ function displayLogs(logs) {
     });
 }
 
-// Function to fetch users from the backend
+// Fetch users from the backend
 async function fetchUsers() {
     try {
-        const response = await fetch('http://localhost:3000/users'); // Adjust the endpoint as necessary
+        const response = await fetch('http://localhost:5000/api/users'); 
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         displayUsers(data.users);
@@ -73,7 +72,7 @@ async function fetchUsers() {
 // Function to display users in the UI
 function displayUsers(users) {
     const userList = document.getElementById('user-list');
-    userList.innerHTML = ''; // Clear previous users
+    userList.innerHTML = ''; 
     users.forEach(user => {
         const userItem = document.createElement('div');
         userItem.className = 'user-item';
