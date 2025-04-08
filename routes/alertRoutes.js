@@ -1,15 +1,17 @@
 const express = require('express');
+const Alert = require('../models/alert');  // Import the Alert model
 const router = express.Router();
 
-// Sample data (replace this with data from your database later)
-const alerts = [
-    { message: 'Suspicious activity detected', severity: 'High', date: new Date() },
-    { message: 'Unusual network traffic', severity: 'Medium', date: new Date() }
-];
-
-// GET /api/alerts - Fetch all alerts
-router.get('/', (req, res) => {
-    res.json({ alerts });
+// GET /api/alerts - Fetch all alerts from the database
+router.get('/', async (req, res) => {
+    try {
+        const alerts = await Alert.find();
+        res.status(200).json(alerts);  
+    } catch (error) {
+        console.error('Error fetching alerts:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
 });
 
 module.exports = router;
+
