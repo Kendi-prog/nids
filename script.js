@@ -1,3 +1,14 @@
+function toggleSection(button, section) {
+    if (section.classList.contains('hidden')) {
+        section.classList.remove('hidden'); // Show the section
+        button.textContent = `Hide ${button.textContent.split(' ')[1]}`; // Change button text to "Hide"
+    } else {
+        section.classList.add('hidden'); // Hide the section
+        button.textContent = `Fetch ${button.textContent.split(' ')[1]}`; // Change button text to "Show"
+    }
+}
+
+
 async function fetchAlerts() {
     try {
         const response = await fetch('http://localhost:5000/api/alerts');
@@ -32,14 +43,16 @@ function displayAlerts(alerts) {
     alertList.innerHTML = ''; 
     alerts.forEach(alert => {
         const alertItem = document.createElement('div');
-        alertItem.className = 'alert-item';
+        alertItem.className = 'alert-item item-container'; 
+        // alertItem.className = 'alert-item';
         alertItem.innerHTML = `
-            <strong>Alert:</strong> ${alert.message} <br>
-            <strong>Severity:</strong> ${alert.severity} <br>
-            <strong>Protocol:</strong> ${alert.protocol} <br> <!-- Added protocol -->
-            <strong>Source IP:</strong> ${alert.sourceIP} <br> <!-- Added sourceIP -->
-            <strong>Destination IP:</strong> ${alert.destinationIP} <br> <!-- Added destinationIP -->
-            <strong>Date:</strong> ${new Date(alert.timestamp).toLocaleString()}
+            <h3>Alert Details</h3>
+            <div class="item-header">Message:</div> ${alert.message} <br>
+            <div class="item-header">Severity:</div> ${alert.severity} <br>
+            <div class="item-header">Protocol:</div> ${alert.protocol} <br>
+            <div class="item-header">Source IP:</div> ${alert.sourceIP} <br>
+            <div class="item-header">Destination IP:</div> ${alert.destinationIP} <br>
+            <div class="item-header">Date:</div> ${new Date(alert.timestamp).toLocaleString()}
         `;
         alertList.appendChild(alertItem);
     });
@@ -76,12 +89,13 @@ function displayLogs(logs) {
     if (Array.isArray(logs)) {
         logs.forEach(log => {
             const logItem = document.createElement('div');
-            logItem.className = 'log-item';
+            logItem.className = 'log-item item-container';
             logItem.innerHTML = `
-                <strong>Log:</strong> ${log.message} <br>
-                <strong>Level:</strong> ${log.level} <br>
-                <strong>Source:</strong> ${log.source} <br>
-                <strong>Date:</strong> ${log.timestamp ? new Date(log.timestamp).toLocaleString() : 'N/A'}
+                <h3>Log Details</h3>
+                <div class="item-header">Message:</div> ${log.message} <br>
+                <div class="item-header">Level:</div> ${log.level} <br>
+                <div class="item-header">Source:</div> ${log.source} <br>
+                <div class="item-header">Date:</div> ${log.timestamp ? new Date(log.timestamp).toLocaleString() : 'N/A'}
             `;
             logList.appendChild(logItem);
         });
@@ -120,19 +134,35 @@ function displayUsers(users) {
     userList.innerHTML = ''; 
     users.forEach(user => {
         const userItem = document.createElement('div');
-        userItem.className = 'user-item';
+        userItem.className = 'user-item item-container';
         userItem.innerHTML = `
-            <strong>User:</strong> ${user.username} <br>
-            <strong>Email:</strong> ${user.email} <br>
-            <strong>Role:</strong> ${user.role}
+            <h3>User Details</h3>
+            <div class="item-header">Username:</div> ${user.username} <br>
+            <div class="item-header">Email:</div> ${user.email} <br>
+            <div class="item-header">Role:</div> ${user.role}
         `;
         userList.appendChild(userItem);
     });
 }
 
 
-document.getElementById('fetch-alerts').addEventListener('click', fetchAlerts);
-document.getElementById('fetch-logs').addEventListener('click', fetchLogs);
-document.getElementById('fetch-users').addEventListener('click', fetchUsers);
+// document.getElementById('fetch-alerts').addEventListener('click', fetchAlerts);
+// document.getElementById('fetch-logs').addEventListener('click', fetchLogs);
+// document.getElementById('fetch-users').addEventListener('click', fetchUsers);
+
+document.getElementById('fetch-alerts').addEventListener('click', () => {
+    fetchAlerts();
+    toggleSection(document.getElementById('fetch-alerts'), document.getElementById('alert-list'));
+});
+
+document.getElementById('fetch-logs').addEventListener('click', () => {
+    fetchLogs();
+    toggleSection(document.getElementById('fetch-logs'), document.getElementById('log-list'));
+});
+
+document.getElementById('fetch-users').addEventListener('click', () => {
+    fetchUsers();
+    toggleSection(document.getElementById('fetch-users'), document.getElementById('user-list'));
+});
 
 

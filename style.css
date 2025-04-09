@@ -107,6 +107,10 @@ button {
     transition: background-color 0.3s;
 }
 
+.hidden {
+    display: none;
+}
+
 button:hover {
     background-color: #357ab8;
 }
@@ -143,4 +147,55 @@ footer {
     nav ul li {
         margin: 10px 0;
     }
+}
+
+
+/* General styling for the item containers */
+.item-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.item-header{
+    font-weight: bold;
+    font-size: 17px;
+}
+
+/* Heading for each section (Alert, Log, User) */
+.item-container h3 {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Style for item content */
+.item-container div {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 5px;
+}
+
+/* Additional spacing between different parts */
+.item-container .item-header {
+    font-weight: bold;
+}
+
+/* You can also add specific styles for different types of items */
+.alert-item {
+    background-color: #ffe0e0;
+}
+
+.log-item {
+    background-color: #e0f7fa;
+}
+
+.user-item {
+    background-color: #f1f8e9;
 }
