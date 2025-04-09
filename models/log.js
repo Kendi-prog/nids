@@ -1,12 +1,26 @@
 const mongoose = require('mongoose');
 
+// Define the Log schema
 const logSchema = new mongoose.Schema({
-    timestamp: { type: Date, default: Date.now },
-    level: { type: String, required: true }, 
-    message: { type: String, required: true },
-    context: { type: String }
+    message: {
+        type: String,
+        required: true,
+    },
+    level: {
+        type: String,
+        required: true,
+        enum: ['info', 'warn', 'error', 'critical'],
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now, 
+    },
+    source: {
+        type: String,
+        required: true,
+    }
 });
 
-const Log = mongoose.model('Log', logSchema);
 
+const Log = mongoose.model('Log', logSchema);
 module.exports = Log;

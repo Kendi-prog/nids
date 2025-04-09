@@ -36,6 +36,9 @@ function displayAlerts(alerts) {
         alertItem.innerHTML = `
             <strong>Alert:</strong> ${alert.message} <br>
             <strong>Severity:</strong> ${alert.severity} <br>
+            <strong>Protocol:</strong> ${alert.protocol} <br> <!-- Added protocol -->
+            <strong>Source IP:</strong> ${alert.sourceIP} <br> <!-- Added sourceIP -->
+            <strong>Destination IP:</strong> ${alert.destinationIP} <br> <!-- Added destinationIP -->
             <strong>Date:</strong> ${new Date(alert.timestamp).toLocaleString()}
         `;
         alertList.appendChild(alertItem);
@@ -43,33 +46,43 @@ function displayAlerts(alerts) {
 }
 
 
-// Fetch logs from the backend
 async function fetchLogs() {
     try {
-        const response = await fetch('http://localhost:5000/api/logs'); 
+        const response = await fetch('http://localhost:5000/api/logs');
         if (!response.ok) throw new Error('Network response was not ok');
+        
         const data = await response.json();
-        displayLogs(data.logs);
-        document.getElementById('total-logs').innerText = data.logs.length;
+        console.log('Fetched logs data:', data); // Check what you get here
+
+        const logs = data.logs;  // Ensure logs are accessed from the returned object
+        displayLogs(logs);  // Pass the logs to display
+        document.getElementById('total-logs').innerText = logs.length; // Set log count
     } catch (error) {
         console.error('Error fetching logs:', error);
         alert('Failed to fetch logs. Please try again later.');
     }
 }
 
-// Function to display logs in the UI
 function displayLogs(logs) {
     const logList = document.getElementById('log-list');
-    logList.innerHTML = ''; 
-    logs.forEach(log => {
-        const logItem = document.createElement('div');
-        logItem.className = 'log-item';
-        logItem.innerHTML = `
-            <strong>Log:</strong> ${log.message} <br>
-            <strong>Date:</strong> ${new Date(log.date).toLocaleString()}
-        `;
-        logList.appendChild(logItem);
-    });
+    logList.innerHTML = ''; // Clear existing logs
+
+    if (Array.isArray(logs)) {
+        logs.forEach(log => {
+            const logItem = document.createElement('div');
+            logItem.className = 'log-item';
+            logItem.innerHTML = `
+                <strong>Log:</strong> ${log.message} <br>
+                <strong>Level:</strong> ${log.level} <br>
+                <strong>Source:</strong> ${log.source} <br>
+                <strong>Date:</strong> ${log.timestamp ? new Date(log.timestamp).toLocaleString() : 'N/A'}
+            `;
+            logList.appendChild(logItem);
+        });
+    } else {
+        console.warn('Expected logs to be an array but received:', logs);
+        logList.innerHTML = 'No logs found or error in log data.';
+    }
 }
 
 // Fetch users from the backend
@@ -85,31 +98,7 @@ async function fetchUsers() {
     }
 }
 
-document.getElementById('register-form').addEventListener('submit', async function(e) {
-    e.preventDefault(); // Prevent the form from reloading the page
-    
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
 
-    try {
-        const response = await fetch('http://localhost:5000/api/users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, email, password })
-        });
-
-        if (!response.ok) throw new Error('User creation failed');
-        const data = await response.json();
-        document.getElementById('message').innerText = 'User created successfully!';
-        console.log(data); // Optionally log the response data
-    } catch (error) {
-        document.getElementById('message').innerText = error.message;
-        console.error(error);
-    }
-});
 
 // Function to display users in the UI
 function displayUsers(users) {

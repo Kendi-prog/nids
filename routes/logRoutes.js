@@ -1,15 +1,17 @@
 const express = require('express');
+const Log = require('../models/log'); 
 const router = express.Router();
 
-// Sample data (replace this with data from your database later)
-const logs = [
-    { message: 'Login attempt failed', date: new Date() },
-    { message: 'Server started', date: new Date() }
-];
 
-// GET /api/logs - Fetch all logs
-router.get('/', (req, res) => {
-    res.json({ logs });
+router.get('/api/logs', async (req, res) => {
+    try {
+        const logs = await Log.find(); 
+        res.status(200).json({logs}); 
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
+
 
 module.exports = router;
