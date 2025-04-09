@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes'); 
 const alertRoutes = require('./routes/alertRoutes');
 const logRoutes = require('./routes/logRoutes');
+
+
 require('dotenv').config();
 
 // Create an Express app
@@ -22,17 +24,15 @@ mongoose.connect(process.env.MONGO_URI, {
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.error('MongoDB connection error:', err));
   
-
 // Middleware
 app.use(cors()); 
 app.use(bodyParser.json()); 
 
-// Use the routes
+
 app.use('/api/users', userRoutes); 
 app.use('/api/alerts', alertRoutes); 
 app.use('/api/logs', logRoutes); 
 
-// Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

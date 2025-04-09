@@ -14,7 +14,7 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
             {
                 message: 'Suspicious login attempt detected',
                 severity: 'high',
-                date: new Date(),
+                timestamp: new Date(),
                 protocol: 'TCP',  // Add protocol
                 sourceIP: '192.168.0.1',  // Add sourceIP
                 destinationIP: '192.168.1.1'  // Add destinationIP
@@ -22,7 +22,7 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
             {
                 message: 'Firewall blocking potential attack',
                 severity: 'medium',
-                date: new Date(),
+                timestamp: new Date(),
                 protocol: 'UDP',  // Add protocol
                 sourceIP: '192.168.0.2',  // Add sourceIP
                 destinationIP: '192.168.1.2'  // Add destinationIP
@@ -30,7 +30,7 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
             {
                 message: 'New device connected to the network',
                 severity: 'low',
-                date: new Date(),
+                timestamp: new Date(),
                 protocol: 'ICMP',  // Add protocol
                 sourceIP: '192.168.0.3',  // Add sourceIP
                 destinationIP: '192.168.1.3'  // Add destinationIP
@@ -38,7 +38,7 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
             {
                 message: 'Unusual outgoing traffic',
                 severity: 'high',
-                date: new Date(),
+                timestamp: new Date(),
                 protocol: 'TCP',  // Add protocol
                 sourceIP: '192.168.0.4',  // Add sourceIP
                 destinationIP: '192.168.1.4'  // Add destinationIP
@@ -46,7 +46,7 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
             {
                 message: 'Virus detected in the system',
                 severity: 'critical',
-                date: new Date(),
+                timestamp: new Date(),
                 protocol: 'TCP',  // Add protocol
                 sourceIP: '192.168.0.5',  // Add sourceIP
                 destinationIP: '192.168.1.5'  // Add destinationIP

@@ -1,5 +1,5 @@
 const express = require('express');
-const Alert = require('../models/alert');  // Import the Alert model
+const Alert = require('../models/alert');
 const router = express.Router();
 
 // GET /api/alerts - Fetch all alerts from the database

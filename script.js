@@ -1,18 +1,33 @@
 async function fetchAlerts() {
     try {
-        const response = await fetch('http://localhost:5000/api/alerts'); 
+        const response = await fetch('http://localhost:5000/api/alerts');
         if (!response.ok) throw new Error('Network response was not ok');
+        
         const data = await response.json();
-        displayAlerts(data.alerts);
-        document.getElementById('total-alerts').innerText = data.alerts.length;
+        console.log('Fetched alerts:', data); 
+
+       
+        if (data && Array.isArray(data)) {  
+            displayAlerts(data); 
+            document.getElementById('total-alerts').innerText = data.length; 
+        } else {
+            console.error('Error: Alerts is not an array or is undefined');
+            document.getElementById('total-alerts').innerText = '0';
+        }
     } catch (error) {
         console.error('Error fetching alerts:', error);
         alert('Failed to fetch alerts. Please try again later.');
     }
 }
 
+
 // Function to display alerts in the UI
 function displayAlerts(alerts) {
+    if (!Array.isArray(alerts)) {
+        console.error('Expected an array of alerts but received:', alerts);
+        return;
+    }
+    
     const alertList = document.getElementById('alert-list');
     alertList.innerHTML = ''; 
     alerts.forEach(alert => {
@@ -21,11 +36,12 @@ function displayAlerts(alerts) {
         alertItem.innerHTML = `
             <strong>Alert:</strong> ${alert.message} <br>
             <strong>Severity:</strong> ${alert.severity} <br>
-            <strong>Date:</strong> ${new Date(alert.date).toLocaleString()}
+            <strong>Date:</strong> ${new Date(alert.timestamp).toLocaleString()}
         `;
         alertList.appendChild(alertItem);
     });
 }
+
 
 // Fetch logs from the backend
 async function fetchLogs() {
@@ -111,12 +127,9 @@ function displayUsers(users) {
     });
 }
 
-// Event listeners for buttons
+
 document.getElementById('fetch-alerts').addEventListener('click', fetchAlerts);
 document.getElementById('fetch-logs').addEventListener('click', fetchLogs);
 document.getElementById('fetch-users').addEventListener('click', fetchUsers);
 
-// Initial fetch for dashboard data
-fetchAlerts();
-fetchLogs();
-fetchUsers();
+
