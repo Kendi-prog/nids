@@ -1,8 +1,8 @@
-require('dotenv').config(); // Load environment variables from .env file
+require('dotenv').config(); 
 const mongoose = require('mongoose');
-const Alert = require('./models/alert'); // Import the Alert model
+const Alert = require('./models/alert'); 
 
-// Use the MONGO_URI from the .env file
+
 const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -15,41 +15,41 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
                 message: 'Suspicious login attempt detected',
                 severity: 'high',
                 timestamp: new Date(),
-                protocol: 'TCP',  // Add protocol
-                sourceIP: '192.168.0.1',  // Add sourceIP
-                destinationIP: '192.168.1.1'  // Add destinationIP
+                protocol: 'TCP',  
+                sourceIP: '192.168.0.1', 
+                destinationIP: '192.168.1.1' 
             },
             {
                 message: 'Firewall blocking potential attack',
                 severity: 'medium',
                 timestamp: new Date(),
-                protocol: 'UDP',  // Add protocol
-                sourceIP: '192.168.0.2',  // Add sourceIP
-                destinationIP: '192.168.1.2'  // Add destinationIP
+                protocol: 'UDP',  
+                sourceIP: '192.168.0.2',  
+                destinationIP: '192.168.1.2'  
             },
             {
                 message: 'New device connected to the network',
                 severity: 'low',
                 timestamp: new Date(),
-                protocol: 'ICMP',  // Add protocol
-                sourceIP: '192.168.0.3',  // Add sourceIP
-                destinationIP: '192.168.1.3'  // Add destinationIP
+                protocol: 'ICMP',  
+                sourceIP: '192.168.0.3',  
+                destinationIP: '192.168.1.3'  
             },
             {
                 message: 'Unusual outgoing traffic',
                 severity: 'high',
                 timestamp: new Date(),
-                protocol: 'TCP',  // Add protocol
-                sourceIP: '192.168.0.4',  // Add sourceIP
-                destinationIP: '192.168.1.4'  // Add destinationIP
+                protocol: 'TCP',  
+                sourceIP: '192.168.0.4',  
+                destinationIP: '192.168.1.4'  
             },
             {
                 message: 'Virus detected in the system',
                 severity: 'critical',
                 timestamp: new Date(),
-                protocol: 'TCP',  // Add protocol
-                sourceIP: '192.168.0.5',  // Add sourceIP
-                destinationIP: '192.168.1.5'  // Add destinationIP
+                protocol: 'TCP',  
+                sourceIP: '192.168.0.5',  
+                destinationIP: '192.168.1.5'  
             }
         ];
        

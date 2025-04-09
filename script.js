@@ -1,10 +1,10 @@
 function toggleSection(button, section) {
     if (section.classList.contains('hidden')) {
         section.classList.remove('hidden'); // Show the section
-        button.textContent = `Hide ${button.textContent.split(' ')[1]}`; // Change button text to "Hide"
+        button.textContent = `Hide ${button.textContent.split(' ')[1]}`; 
     } else {
         section.classList.add('hidden'); // Hide the section
-        button.textContent = `Fetch ${button.textContent.split(' ')[1]}`; // Change button text to "Show"
+        button.textContent = `Fetch ${button.textContent.split(' ')[1]}`; 
     }
 }
 
@@ -14,9 +14,7 @@ async function fetchAlerts() {
         const response = await fetch('http://localhost:5000/api/alerts');
         if (!response.ok) throw new Error('Network response was not ok');
         
-        const data = await response.json();
-        console.log('Fetched alerts:', data); 
-
+        const data = await response.json(); 
        
         if (data && Array.isArray(data)) {  
             displayAlerts(data); 
@@ -44,7 +42,6 @@ function displayAlerts(alerts) {
     alerts.forEach(alert => {
         const alertItem = document.createElement('div');
         alertItem.className = 'alert-item item-container'; 
-        // alertItem.className = 'alert-item';
         alertItem.innerHTML = `
             <h3>Alert Details</h3>
             <div class="item-header">Message:</div> ${alert.message} <br>
@@ -65,14 +62,13 @@ async function fetchLogs() {
         if (!response.ok) throw new Error('Network response was not ok');
         
         const data = await response.json();
-        console.log('Fetched logs data:', data); // Check what you get here
          
         if (data && Array.isArray(data)) {  
-            displayLogs(data); // Pass the logs to display
-            document.getElementById('total-logs').innerText = data.length; // Set log count 
+            displayLogs(data); 
+            document.getElementById('total-logs').innerText = data.length;
         } else {
             console.error('Error: Logs is not an array or is undefined');
-            document.getElementById('total-logs').innerText = '0'; // Set log count to 0 if no logs found
+            document.getElementById('total-logs').innerText = '0'; 
         }
 
     
@@ -84,7 +80,7 @@ async function fetchLogs() {
 
 function displayLogs(logs) {
     const logList = document.getElementById('log-list');
-    logList.innerHTML = ''; // Clear existing logs
+    logList.innerHTML = ''; 
 
     if (Array.isArray(logs)) {
         logs.forEach(log => {
@@ -111,22 +107,17 @@ async function fetchUsers() {
         const response = await fetch('http://localhost:5000/api/users'); 
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
-        // displayUsers(data.users);
 
         if (data && Array.isArray(data)) {  
-            displayUsers(data);
-           
+            displayUsers(data);    
         } else {
             console.error('Error: Alerts is not an array or is undefined');
-            document.getElementById('total-users').innerText = '0';
         }
     } catch (error) {
         console.error('Error fetching users:', error);
         alert('Failed to fetch users. Please try again later.');
     }
 }
-
-
 
 // Function to display users in the UI
 function displayUsers(users) {
@@ -145,10 +136,6 @@ function displayUsers(users) {
     });
 }
 
-
-// document.getElementById('fetch-alerts').addEventListener('click', fetchAlerts);
-// document.getElementById('fetch-logs').addEventListener('click', fetchLogs);
-// document.getElementById('fetch-users').addEventListener('click', fetchUsers);
 
 document.getElementById('fetch-alerts').addEventListener('click', () => {
     fetchAlerts();

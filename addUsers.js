@@ -1,17 +1,17 @@
-require('dotenv').config(); // Load environment variables from .env file
+require('dotenv').config();
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs'); // To hash passwords
-const User = require('./models/user'); // Import the User model
+const bcrypt = require('bcryptjs'); 
+const User = require('./models/user'); 
 
-// Use the MONGO_URI from the .env file
+
 const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(async () => {
         console.log('Connected to MongoDB');
         
-        // Sample users with hardcoded passwords
-        const hashedPassword = await bcrypt.hash('password123', 10); // Hash the password
+      
+        const hashedPassword = await bcrypt.hash('password123', 10); 
 
         const users = [
             {
@@ -34,7 +34,6 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
             }
         ];
         
-        // Add users to the database
         await User.insertMany(users);
 
         console.log('Sample users added');

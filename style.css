@@ -1,4 +1,3 @@
-/* General Styles */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -45,7 +44,6 @@ nav ul li a:hover {
     color: #ffcc00;
 }
 
-/* Main Content Styles */
 main {
     padding: 20px;
 }
@@ -63,7 +61,6 @@ section:hover {
     transform: translateY(-2px);
 }
 
-/* Dashboard Cards */
 .dashboard-cards {
     display: flex;
     justify-content: space-around;
@@ -95,7 +92,7 @@ section:hover {
     font-weight: bold;
 }
 
-/* Button Styles */
+
 button {
     background-color: #4a90e2;
     color: white;
@@ -115,7 +112,6 @@ button:hover {
     background-color: #357ab8;
 }
 
-/* Footer Styles */
 footer {
     text-align: center;
     padding: 15px 0;
@@ -127,7 +123,7 @@ footer {
     margin-top: 20px;
 }
 
-/* Responsive Styles */
+
 @media (max-width: 768px) {
     .dashboard-cards {
         flex-direction: column;
@@ -150,7 +146,6 @@ footer {
 }
 
 
-/* General styling for the item containers */
 .item-container {
     display: flex;
     flex-direction: column;
@@ -175,19 +170,17 @@ footer {
     color: #333;
 }
 
-/* Style for item content */
 .item-container div {
     font-size: 0.9em;
     color: #555;
     margin-top: 5px;
 }
 
-/* Additional spacing between different parts */
 .item-container .item-header {
     font-weight: bold;
 }
 
-/* You can also add specific styles for different types of items */
+
 .alert-item {
     background-color: #ffe0e0;
 }

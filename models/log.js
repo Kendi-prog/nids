@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Define the Log schema
 const logSchema = new mongoose.Schema({
     message: {
         type: String,
