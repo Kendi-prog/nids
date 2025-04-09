@@ -53,10 +53,16 @@ async function fetchLogs() {
         
         const data = await response.json();
         console.log('Fetched logs data:', data); // Check what you get here
+         
+        if (data && Array.isArray(data)) {  
+            displayLogs(data); // Pass the logs to display
+            document.getElementById('total-logs').innerText = data.length; // Set log count 
+        } else {
+            console.error('Error: Logs is not an array or is undefined');
+            document.getElementById('total-logs').innerText = '0'; // Set log count to 0 if no logs found
+        }
 
-        const logs = data.logs;  // Ensure logs are accessed from the returned object
-        displayLogs(logs);  // Pass the logs to display
-        document.getElementById('total-logs').innerText = logs.length; // Set log count
+    
     } catch (error) {
         console.error('Error fetching logs:', error);
         alert('Failed to fetch logs. Please try again later.');
@@ -91,7 +97,15 @@ async function fetchUsers() {
         const response = await fetch('http://localhost:5000/api/users'); 
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
-        displayUsers(data.users);
+        // displayUsers(data.users);
+
+        if (data && Array.isArray(data)) {  
+            displayUsers(data);
+           
+        } else {
+            console.error('Error: Alerts is not an array or is undefined');
+            document.getElementById('total-users').innerText = '0';
+        }
     } catch (error) {
         console.error('Error fetching users:', error);
         alert('Failed to fetch users. Please try again later.');
